@@ -6,7 +6,7 @@ import CardHome from '../components/CardHome'
 import {collection , doc, getDocs} from "firebase/firestore"; 
 import {db} from '../firebase-config'
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@mui/material'
+import {Button } from '@mui/material'
 
 
 
