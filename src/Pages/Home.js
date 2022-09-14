@@ -47,16 +47,17 @@ const imageListRef = ref(storage, "imageList");
 
         <Box>
            <Container maxWidth="lg">
-            <Box >
+            <Box sx={{maxHeight:{xs:250,sm:350, md:450}}}>
              <Carousel
              sx={{maxHeight:{xs:250,sm:350, md:450}}}
-            //  height={450}
+  
              animation={'slide'}
              duration={400}
              navButtonsAlwaysVisible={'true'}
              >
+
             {
-                photos.map( (url, i) => <img > key={i} src={`${url}?w=164&h=164&fit=crop&auto=format`} </img> )
+                photos.map( (url) => <img   src={`${url}?auto=format&fit=crop&w=40&h=250`} ></img> )
             }
                 </Carousel>
             </Box>
