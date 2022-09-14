@@ -1,29 +1,8 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useEffect, useRef, useState, useContext, useCallback, } from "react";
 import Typography from "@mui/material/Typography";
 import {
-  Container,
-  Divider,
-  Grid,
-  Snackbar,
-  Alert,
-  Input,
-  Box,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  IconButton,
-  Slide,
-  Dialog,
-  DialogContentText,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  Container, Divider, Grid, Snackbar, Alert, Input, Box, ImageList, ImageListItem, ImageListItemBar,
+  IconButton, Slide, Dialog, DialogContentText, DialogActions, DialogContent, DialogTitle,
 } from "@mui/material";
 import { ColorModeContext } from "../App";
 import CardHome from "../components/CardHome";
@@ -61,7 +40,7 @@ const ViewAndDeleteImgList = (props) => {
   const handleClickOpen = (url) => {
     setAlert(true);
     const photoRef = ref(storage, url);
-    const deleteRef = photoRef.fullPath;
+    const deleteRef = ref(storage, `imageList/${photoRef.name}`);
     console.log(deleteRef)
     deleteObject(deleteRef)
   };
@@ -104,7 +83,7 @@ const ViewAndDeleteImgList = (props) => {
               <img
                 src={`${url}?w=164&h=164&fit=crop&auto=format`}
                 loading="lazy"
-                
+
               />
               <ImageListItemBar
                 sx={{
@@ -114,9 +93,9 @@ const ViewAndDeleteImgList = (props) => {
                 }}
                 position="top"
                 actionIcon={
-                    <IconButton size="large" onClick={() => handleClickOpen(url)}>
-                      <DeleteIcon />
-                    </IconButton>
+                  <IconButton size="large" onClick={() => handleClickOpen(url)}>
+                    <DeleteIcon />
+                  </IconButton>
                 }
                 actionPosition="left"
               />
