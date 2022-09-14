@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { ColorModeContext } from "../App";
 import { collection, doc, getDocs } from "firebase/firestore";
+import {listAll, ref, getStorage, getDownloadURL } from "firebase/storage"
 import { db } from "../firebase-config";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -24,15 +25,21 @@ import ImageListItem from "@mui/material/ImageListItem";
 const Photos = (props) => {
   const [photos, setPhotos] = useState([]);
   const photosCollectionRef = collection(db, "photos");
+  const storage = getStorage();
+  const imageListRef = ref(storage, 'imageList')
+  
+
 
   useEffect(() => {
-    const getPhotos = async () => {
-      const data = await getDocs(photosCollectionRef);
-      setPhotos(data.docs.map((doc) => ({ ...doc.data() })));
-    };
-
-    getPhotos();
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setPhotos((prev) => [...prev, url])
+        })
+      })
+    })
   }, []);
+
 
   return (
     <Box sx={{ mt:12 , align: 'center' }}>
@@ -43,12 +50,10 @@ const Photos = (props) => {
         rowHeight= '200'
         
       >
-        {photos.map((photo) => (
-          <ImageListItem key={photo.img} >
+        {photos.map((url) => (
+          <ImageListItem >
             <img
-              src={`${photo.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${photo.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={photo.title}
+              src={`${url}?w=164&h=164&fit=crop&auto=format`}
               loading="lazy"
             />
           </ImageListItem>

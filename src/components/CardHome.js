@@ -4,8 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea , Link} from '@mui/material';
+import { CardActionArea , Link, Box} from '@mui/material';
 import { NavLink } from "react-router-dom";
+
 
 const CardHome = (props) => {
     return(
@@ -15,6 +16,7 @@ const CardHome = (props) => {
 
           textAlign: "center",
         }}>
+             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent>
                 <Divider color="primary"/>
                     <Typography gutterBottom variant="h4" component="div" sx={{mt:2, }}>
@@ -32,6 +34,8 @@ const CardHome = (props) => {
                     <Link href={props.link}>{props.link}</Link>
       
                 </CardContent>
+                </Box>
+
             </Card>
         </div>
     )
