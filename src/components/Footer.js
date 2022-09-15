@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import { NavLink } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -19,6 +22,9 @@ function Copyright() {
 }
 
 export default function StickyFooter() {
+  
+let navigate = useNavigate()
+
   return (
 
       <Box
@@ -36,6 +42,11 @@ export default function StickyFooter() {
           AГP
           </Typography>
           <Copyright />
+          <Typography variant="body2" color="text.secondary" align="center">
+            <Button onClick={() => navigate("/SignIn")}>
+              Admin
+          </Button>
+          </Typography>
         </Container>
       </Box>
    

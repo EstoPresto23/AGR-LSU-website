@@ -19,6 +19,7 @@ import Calander from "./Pages/Calander";
 import Members from "./Pages/Members";
 import UploadImgList from "./Pages/UploadImgList";
 import ViewAndDeleteImgList from "./Pages/ViewAndDeleteImgList";
+import SignIn from "./Pages/SignIn";
 import Footer from "./components/Footer";
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -113,6 +114,8 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
+
+              <Route path="/SignIn" element={<SignIn />} />
 
               <Route path="/alumni" element={<Alumni />} />
 
