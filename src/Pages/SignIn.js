@@ -10,44 +10,47 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Snackbar, Alert } from "@mui/material";
 import {auth} from "../firebase-config"
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [openToast, setOpenToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastSeverity, setToastSeverity] = useState("");
+  const [user, setUser] = useState({})
 
-  const register = async () => {
-    try{
-    const User = await createUserWithEmailAndPassword(auth)
-    } catch(error){
-        console.log(error)
-    }
-  };
+  // const register = async () => {
+  //   try{
+  //   const User = await createUserWithEmailAndPassword(auth)
+  //   } catch(error){
+  //       console.log(error)
+  //   }
+  // };
 
-  const login = async () => {
+  onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      // use {user.email} to confirm
+  })
 
-
-  };
 
   const logout = async () => {
-
+    await signOut(auth);
 
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const registerEmail = data.get('email');
-    const registerPassword = data.get('password');
+    const loginEmail = data.get('email');
+    const loginPassword = data.get('password');
     try{
-        const User = await createUserWithEmailAndPassword(auth , registerEmail, registerPassword)
-        } catch(error){
-            console.log(error)
-        }
-
-
+        const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+        console.log(user)
+         } catch(error){
+             setOpenToast(true);
+             setToastMessage('Wrong Email or Password!');
+             setToastSeverity('error');
+         }
 
     }
    
