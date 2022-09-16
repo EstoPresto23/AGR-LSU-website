@@ -19,8 +19,11 @@ import Calander from "./Pages/Calander";
 import Members from "./Pages/Members";
 import UploadImgList from "./Pages/UploadImgList";
 import ViewAndDeleteImgList from "./Pages/ViewAndDeleteImgList";
+import ViewAndDeleteCarouselImg from "./Pages/ViewAndDeleteCarouselImg";
 import SignIn from "./Pages/SignIn";
 import Footer from "./components/Footer";
+import {onAuthStateChanged, getAuth} from "firebase/auth";
+
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -68,8 +71,8 @@ const getDesignTokens = (mode) => ({
 function App() {
   const [mode, setMode] = useState("light");
   const [cookies, setCookie] = useCookies(["mode"]);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const pages = collection(db, "pages");
+
 
   useEffect(() => {
     const getPages = async () => {
@@ -95,15 +98,10 @@ function App() {
     if (cookies.mode) {
       setMode(cookies.mode);
     }
+
   }, []);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
-  const handleClick = () => {
-    setMobileOpen((prev) => {
-      return !prev;
-    });
-  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -128,8 +126,11 @@ function App() {
               <Route path="/members" element={<Members />} />
 
               <Route path="/updateImages" element={<UploadImgList />} />
-
+ 
               <Route path="/ViewAndDeleteImgList" element={<ViewAndDeleteImgList />} />
+
+              <Route path="/ViewAndDeleteCarouselImg" element={<ViewAndDeleteCarouselImg />} />
+
 
               <Route
                 path="*"

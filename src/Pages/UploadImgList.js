@@ -23,6 +23,8 @@ import { Button } from "@mui/material";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import {  useNavigate } from "react-router-dom";
+import {auth} from "../firebase-config"
+
 
 const UploadImgList = (props) => {
   const [imgUpload, setImgUpload] = useState(null);
@@ -34,17 +36,27 @@ const UploadImgList = (props) => {
   const storageRef = ref(storage);
   // Points to 'images'
 
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  const uploadImage = () => {
+  const uploadImageToPhotos = () => {
     if (imgUpload == null) return;
     const imagesRef = ref(storage, `imageList/${imgUpload.Name + v4()}`);
     uploadBytes(imagesRef, imgUpload).then(() => {
       setOpen(true);
     });
   };
+
+  const uploadImageToCarousel = () => {
+    if (imgUpload == null) return;
+    const imagesRef = ref(storage, `carouselPics/${imgUpload.Name + v4()}`);
+    uploadBytes(imagesRef, imgUpload).then(() => {
+      setOpen(true);
+    });
+  };
+
 
   return (
     <Box sx={{ m: 5 }}>
@@ -56,7 +68,7 @@ const UploadImgList = (props) => {
         }}
       />
       <Button
-        onClick={uploadImage}
+        onClick={uploadImageToPhotos}
         sx={{m:2}}
         // variant="Contained"
       >
@@ -71,6 +83,24 @@ const UploadImgList = (props) => {
       >
        View and Delete Images To Photos Tab
       </Button>
+
+      <Button
+        onClick={uploadImageToCarousel}
+        sx={{m:2}}
+        // variant="Contained"
+      >
+        Upload Image To Home Carousel Tab
+      </Button>
+
+      <Button
+        onClick={() => navigate('/ViewAndDeleteCarouselImg')}
+        sx={{m:2}}
+        // variant="Contained"
+
+      >
+       View and Delete Images To Image Carousel
+      </Button>
+      
 
       <Snackbar open={open} onClose={handleClose} autoHideDuration={5000}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>

@@ -1,12 +1,13 @@
-import * as React from 'react';
+import React, { useEffect, useRef, useState, useContext } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import { NavLink } from "react-router-dom";
+import {onAuthStateChanged, getAuth} from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
+
 
 function Copyright() {
   return (
@@ -21,9 +22,14 @@ function Copyright() {
   );
 }
 
+
 export default function StickyFooter() {
-  
+
+const auth = getAuth();
 let navigate = useNavigate()
+
+
+
 
   return (
 
@@ -43,7 +49,7 @@ let navigate = useNavigate()
           </Typography>
           <Copyright />
           <Typography variant="body2" color="text.secondary" align="center">
-            <Button onClick={() => navigate("/SignIn")}>
+            <Button onClick={() => navigate('/SignIn')}>
               Admin
           </Button>
           </Typography>

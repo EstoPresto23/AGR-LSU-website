@@ -16,7 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-const ViewAndDeleteImgList = (props) => {
+const ViewAndDeleteCarouselImg = (props) => {
   const [open, setOpen] = useState(false);
   
   const [selPhoto, setSelPhoto] = useState([]);
@@ -29,19 +29,19 @@ const ViewAndDeleteImgList = (props) => {
 
   const [photos, setPhotos] = useState([]);
   const photosCollectionRef = collection(db, "photos");
-  const imageListRef = ref(storage, "imageList");
+  const carouselPicsRef = ref(storage, "carouselPics");
 
 
   const handleClickOpen = (url) => {
     alert('This Image Will Be deleted')
     const photoRef = ref(storage, url);
-    const deleteRef = ref(storage, `imageList/${photoRef.name}`);
+    const deleteRef = ref(storage, `carouselPics/${photoRef.name}`);
     console.log(deleteRef)
     deleteObject(deleteRef)
   };
 
   useEffect(() => {
-    listAll(imageListRef).then((response) => {
+    listAll(carouselPicsRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
           setPhotos((prev) => [...prev, url]);
@@ -65,7 +65,7 @@ const ViewAndDeleteImgList = (props) => {
         fontSize="large"
         onClick={() => navigate("/updateImages")}
       />
-      <Typography>This is what the user sees on photos. When you press the delete icon you will DELETE the picture!</Typography>
+      <Typography>These are the images the user sees on the home page Image Carousel. When you press the delete icon you will DELETE the picture!</Typography>
 
       <Box sx={{ mt: 12, align: "center" }}>
         <ImageList sx={{ height: 700 }} variant="" rowHeight="200">
@@ -103,4 +103,4 @@ const ViewAndDeleteImgList = (props) => {
     </Box>
   );
 };
-export default ViewAndDeleteImgList;
+export default ViewAndDeleteCarouselImg;

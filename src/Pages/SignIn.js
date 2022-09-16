@@ -10,51 +10,77 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Snackbar, Alert } from "@mui/material";
 import {auth} from "../firebase-config"
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,
+   onAuthStateChanged, signOut,
+    signInWithEmailAndPassword,
+     GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
-  const [openToast, setOpenToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastSeverity, setToastSeverity] = useState("");
-  const [user, setUser] = useState({})
 
-  // const register = async () => {
-  //   try{
-  //   const User = await createUserWithEmailAndPassword(auth)
-  //   } catch(error){
-  //       console.log(error)
-  //   }
-  // };
+
+const SignIn = () => {
+  const [openToast, setOpenToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastSeverity, setToastSeverity] = useState('')
+  const provider = new GoogleAuthProvider();
+  const [user, setUser] = useState({})
+  const navigate = useNavigate()
 
   onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-      // use {user.email} to confirm
-  })
+   setUser(currentUser);
+   console.log(currentUser)
+   console.log(user)
+    if(currentUser!=null){
+      navigate('/updateImages')
+    }
+    if(currentUser=null){
+      navigate('/home')
+    }
+  });
 
-
+  const SignInWithGoogle = () => {
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    console.log(token)
+    // The signed-in user info.
+    setUser(result.user);
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
   const logout = async () => {
     await signOut(auth);
-
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const loginEmail = data.get('email');
-    const loginPassword = data.get('password');
+  const login = async (event) => {
     try{
-        const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-        console.log(user)
-         } catch(error){
-             setOpenToast(true);
-             setToastMessage('Wrong Email or Password!');
-             setToastSeverity('error');
-         }
-
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const loginEmail = data.get('email');
+      const loginPassword = data.get('password');
+    const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+    console.log(user)
     }
+    catch(error){
+      const errorMessage = error.message;
+      alert(errorMessage);
+    }
+    };
+
+
    
-  
+    
   const handleToastClose = () => {
     setOpenToast(false);
   };
@@ -76,7 +102,7 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
+        <Box component="form" onSubmit={login} noValidate sx={{ mt: 2 }}>
           <TextField
             margin="normal"
             required
@@ -108,14 +134,28 @@ const SignIn = () => {
           >
             Sign In
           </Button>
+          <Button
+            onClick={SignInWithGoogle}
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Or Sign In with Google
+          </Button>
           <Grid container>
             <Grid item xs></Grid>
           </Grid>
         </Box>
       </Box>
-      <Snackbar open={openToast} onClose={handleToastClose}>
-        <Alert severity={toastSeverity}>{toastMessage}</Alert>
+      <Snackbar 
+        open={openToast}
+        onClose={handleToastClose}
+      >
+        <Alert severity={toastSeverity}>
+          {toastMessage}
+        </Alert>
       </Snackbar>
+      
     </Container>
   );
 };

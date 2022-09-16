@@ -12,15 +12,17 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useTheme } from "@mui/material/styles";
 import { ColorModeContext } from "../App";
 import { db, storage } from "../firebase-config";
-import { ref } from "firebase/storage";
 import NavbarTabs from "./NavbarTabs.js";
 import NavDrawer from "./NavDrawer.js";
+import {getAuth, signOut} from "firebase/auth";
 
 
 const Navbar = (props) => {
 let navigate = useNavigate()
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+  const auth = getAuth();
+  const user = auth.currentUser;
   const agrLetters =
     "https://firebasestorage.googleapis.com/v0/b/agr-website-be171.appspot.com/o/logos%2FAGR%20letters.webp?alt=media&token=147c465b-b8f6-41bf-a83d-17b720d0feed";
   const agrLogo =
@@ -28,7 +30,14 @@ let navigate = useNavigate()
   const agrCrestLogo =
     "https://firebasestorage.googleapis.com/v0/b/agr-website-be171.appspot.com/o/logos%2FAGRcrest%20logo.png?alt=media&token=549067aa-2297-43ae-adf7-36fee42e096b";
 
-  return (
+    const logout = async () => {
+      await signOut(auth);
+      console.log(auth)
+      navigate('/')
+    };
+  
+   
+    return (
     <header>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed" sx={{ zIndex: 1000 }}>
@@ -90,6 +99,11 @@ let navigate = useNavigate()
                     <Brightness4Icon />
                 )}
                 </IconButton>
+
+                {user!=null &&
+
+                  <Button onClick={logout}>Logout</Button>
+                }
            
           </Toolbar>
         </AppBar>
