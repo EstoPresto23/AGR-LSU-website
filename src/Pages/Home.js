@@ -49,8 +49,8 @@ const imageListRef = ref(storage, "imageList");
            <Container maxWidth="lg">
             <Box sx={{maxHeight:{xs:250,sm:350, md:450}}}>
              <Carousel
-            //  sx={{maxHeight:{xs:250,sm:350, md:450}}}
-            className="slider"
+              sx={{maxHeight:{xs:250,sm:350, md:450}}}
+            //className="slider"
              animation={'slide'}
              duration={400}
              navButtonsAlwaysVisible={'true'}
