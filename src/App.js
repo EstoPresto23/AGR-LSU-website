@@ -22,7 +22,7 @@ import ViewAndDeleteImgList from "./Pages/ViewAndDeleteImgList";
 import ViewAndDeleteCarouselImg from "./Pages/ViewAndDeleteCarouselImg";
 import SignIn from "./Pages/SignIn";
 import Footer from "./components/Footer";
-import {onAuthStateChanged, getAuth} from "firebase/auth";
+import PrivateRoute from "./components/PrivateRoute";
 
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -121,15 +121,18 @@ function App() {
 
               <Route path="/photos" element={<Photos />} />
 
-              <Route path="/calander" element={<Calander />} />
 
               <Route path="/members" element={<Members />} />
+                    
+              <Route path="/updateImages" element={
+              <PrivateRoute>
+              <UploadImgList />
+              </PrivateRoute>} />
+                    
+              <Route path="/ViewAndDeleteImgList" element={
+              <PrivateRoute><ViewAndDeleteImgList /></PrivateRoute>} />
 
-              <Route path="/updateImages" element={<UploadImgList />} />
- 
-              <Route path="/ViewAndDeleteImgList" element={<ViewAndDeleteImgList />} />
-
-              <Route path="/ViewAndDeleteCarouselImg" element={<ViewAndDeleteCarouselImg />} />
+              <Route path="/ViewAndDeleteCarouselImg" element={<PrivateRoute><ViewAndDeleteCarouselImg /></PrivateRoute>} />
 
 
               <Route

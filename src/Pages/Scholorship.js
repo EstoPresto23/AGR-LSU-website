@@ -33,9 +33,7 @@ const Scholarship = (props) => {
                      title={page.title}
                      info={page.body}
                     link={page.link}
-                    />
-                    
-                  
+                    />      
                 );
             })}
        

@@ -47,7 +47,7 @@ const Photos = (props) => {
         sx={{   height:700 ,}}
         variant=""
         
-        rowHeight= '200'
+        rowHeight= '300'
         
       >
         {photos.map((url) => (

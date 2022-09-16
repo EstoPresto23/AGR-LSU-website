@@ -101,7 +101,6 @@ let navigate = useNavigate()
                 </IconButton>
 
                 {user!=null &&
-
                   <Button onClick={logout}>Logout</Button>
                 }
            

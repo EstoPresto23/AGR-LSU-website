@@ -26,7 +26,6 @@ function NavbarTabs(props) {
         <Button onClick={() => navigate("/alumni")}>Alumni</Button>
         <Button onClick={() => navigate("/scholorship")}>Scholorship</Button>
         <Button onClick={() => navigate("/photos")}>Photos</Button>
-        <Button onClick={() => navigate("/calander")}>Calander</Button>
         <Button onClick={() => navigate("/members")}>Members</Button>
       </ButtonGroup>
     </Box>

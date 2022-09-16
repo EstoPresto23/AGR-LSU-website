@@ -9,6 +9,16 @@ import {onAuthStateChanged, getAuth} from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 
 
+
+
+
+export default function StickyFooter() {
+
+  let navigate = useNavigate()
+const auth = getAuth();
+const user = auth.currentUser;
+const [showContent , setShowContent] = useState(true)
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -22,14 +32,15 @@ function Copyright() {
   );
 }
 
+useEffect(() => {
+  if(user!=null)
+  setShowContent(false)
+})
 
-export default function StickyFooter() {
-
-const auth = getAuth();
-let navigate = useNavigate()
-
-
-
+const signIn = () => {
+  navigate('/SignIn')
+}
+ 
 
   return (
 
@@ -49,9 +60,12 @@ let navigate = useNavigate()
           </Typography>
           <Copyright />
           <Typography variant="body2" color="text.secondary" align="center">
-            <Button onClick={() => navigate('/SignIn')}>
+            { showContent?
+            <Button onClick={signIn}>
               Admin
-          </Button>
+            </Button>
+            :<></>
+          }
           </Typography>
         </Container>
       </Box>

@@ -10,9 +10,6 @@ const Alumni = (props) => {
     const [pages, setPages] = useState([]);
     const pagesCollectionRef = collection(db, "alumni");
     
-    
-
-
     useEffect(() => {
         const getPages = async () => {
             const data = await getDocs(pagesCollectionRef);
@@ -28,19 +25,14 @@ const Alumni = (props) => {
             {pages.sort((a, b) => a.id > b.id ? 1 : -1 )
                 .map((page) => {
                 return(
-                    
                      <CardHome
                      title={page.title}
                      info={page.body}
                      subInfo={page.events}
                     />
-                    
-                  
                 );
             })}
-       
         </Box>
     );
-
 }
 export default Alumni;
