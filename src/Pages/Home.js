@@ -60,7 +60,7 @@ const imageListRef = ref(storage, "imageList");
                 photos.map( (url) => 
                <div className="slider">
                 <img   
-                className='img'
+                className="img"
                 src={`${url}`}
                  />
                  </div>

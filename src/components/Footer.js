@@ -33,8 +33,8 @@ function Copyright() {
 }
 
 useEffect(() => {
-  if(user!=null)
-  setShowContent(false)
+  if(user==null)
+  setShowContent(true)
 })
 
 const signIn = () => {
