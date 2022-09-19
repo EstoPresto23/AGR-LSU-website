@@ -1,17 +1,20 @@
 .slider{
     position: relative;
-    height: 500px;
+    height: 400px;
     max-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .img{
-    max-height: 400px;
-    max-width: 90%;
+    max-height: 490px;
+    min-width: 70%;
+    min-height: 50%;
     height: auto;
-    border-radius: 100px;
+    width: auto;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+

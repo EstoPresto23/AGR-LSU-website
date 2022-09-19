@@ -21,6 +21,7 @@ import {listAll, ref, getStorage, getDownloadURL } from "firebase/storage"
 import { db } from "../firebase-config";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import '../App.css'
 
 const Photos = (props) => {
   const [photos, setPhotos] = useState([]);
@@ -42,11 +43,10 @@ const Photos = (props) => {
 
 
   return (
-    <Box sx={{ mt:12 , align: 'center' }}>
+    <Box sx={{ mt:15 , align: 'center' }}>
       <ImageList
-        sx={{   height:700 ,}}
-        variant=""
-        
+        sx={{   height:700 , justifyContent: 'center'}}
+        cols={2}
         rowHeight= '300'
         
       >

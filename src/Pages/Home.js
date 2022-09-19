@@ -8,6 +8,7 @@ import {db} from '../firebase-config'
 import Carousel from 'react-material-ui-carousel'
 import {Button } from '@mui/material'
 import { getStorage, ref, listAll , getDownloadURL } from "firebase/storage";
+import '../App.css'
 
 
 const Home = (props) => {
@@ -19,7 +20,7 @@ const Home = (props) => {
 const storageRef = ref(storage);
 
 // Points to 'images'
-const imageListRef = ref(storage, "imageList");
+const imageListRef = ref(storage, "carouselPics");
 
 
 
@@ -47,15 +48,12 @@ const imageListRef = ref(storage, "imageList");
 
         <Box>
            <Container maxWidth="lg">
-            <Box sx={{maxHeight:{xs:250,sm:350, md:450}}}>
+            <Box sx={{maxHeight:{xs:450,}}}>
              <Carousel
-              sx={{maxHeight:{xs:250,sm:350, md:450}}}
-            //className="slider"
              animation={'slide'}
              duration={400}
              navButtonsAlwaysVisible={'true'}
              >
-
             {
                 photos.map( (url) => 
                <div className="slider">
