@@ -1,13 +1,13 @@
 .slider{
     position: relative;
-    height: 400px;
+    height: 430px;
     max-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .img{
-    max-height: 490px;
+    max-height: 455px;
     min-width: 70%;
     min-height: 50%;
     height: auto;
