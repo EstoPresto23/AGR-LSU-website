@@ -72,11 +72,11 @@ function NavDrawer(props) {
               <Divider  orientation="vertical" flexItem sx={{ mr:2}} />
                 <ListItemText primary={'Photos'} />
               </ListItemButton>
-              <ListItemButton onClick={() => navigate("/calander")}>
+              {/* <ListItemButton onClick={() => navigate("/calander")}>
               <CalendarMonthIcon color = 'darkGold' sx={{ml:1, mr:2}}/>
               <Divider  orientation="vertical" flexItem sx={{ mr:2}} />
                 <ListItemText primary={'Calander'} />
-              </ListItemButton>
+              </ListItemButton> */}
               <ListItemButton onClick={() => navigate("/members")}>
               <GroupsIcon color = 'darkGold' sx={{ml:1, mr:2}}/>
               <Divider  orientation="vertical" flexItem sx={{ mr:2}} />
