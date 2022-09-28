@@ -20,6 +20,7 @@ import Members from "./Pages/Members";
 import UploadImgList from "./Pages/UploadImgList";
 import ViewAndDeleteImgList from "./Pages/ViewAndDeleteImgList";
 import ViewAndDeleteCarouselImg from "./Pages/ViewAndDeleteCarouselImg";
+import UpdateCardData from "./Pages/UpdateCardData";
 import SignIn from "./Pages/SignIn";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
@@ -133,7 +134,8 @@ function App() {
               <PrivateRoute><ViewAndDeleteImgList /></PrivateRoute>} />
 
               <Route path="/ViewAndDeleteCarouselImg" element={<PrivateRoute><ViewAndDeleteCarouselImg /></PrivateRoute>} />
-
+              
+              <Route path="/UpdateCardData" element={<PrivateRoute><UpdateCardData /></PrivateRoute>} />
 
               <Route
                 path="*"

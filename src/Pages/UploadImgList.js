@@ -27,7 +27,7 @@ import {auth} from "../firebase-config"
 
 
 const UploadImgList = (props) => {
-  const [imgUpload, setImgUpload] = useState(null);
+  const [imgUpload, setImgUpload] = useState([]);
   let navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const pagesCollectionRef = collection(db, "pages");
@@ -51,7 +51,7 @@ const UploadImgList = (props) => {
 
   const uploadImageToCarousel = () => {
     if (imgUpload == null) return;
-    const imagesRef = ref(storage, `carouselPics/${imgUpload.Name + v4()}`);
+    const imagesRef = ref(storage, `carouselPics/${imgUpload.Name + v4()}`)
     uploadBytes(imagesRef, imgUpload).then(() => {
       setOpen(true);
     });
@@ -63,8 +63,10 @@ const UploadImgList = (props) => {
       <Input
         sx={{ m: 2 }}
         type="file"
+        multiple
+
         onChange={(event) => {
-          setImgUpload(event.target.files[0]);
+          setImgUpload(event.target.files[0,1,2,3,4]);
         }}
       />
       <Button
@@ -99,6 +101,15 @@ const UploadImgList = (props) => {
 
       >
        View and Delete Images To Image Carousel
+      </Button>
+
+      <Button
+        onClick={() => navigate('/UpdateCardData')}
+        sx={{m:2}}
+        // variant="Contained"
+
+      >
+       Update Card Data
       </Button>
       
 

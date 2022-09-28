@@ -112,7 +112,7 @@ const SignIn = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            helperText="Use your school email (do not include @lsu.edu)"
+            
           />
           <TextField
             margin="normal"
@@ -123,7 +123,7 @@ const SignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            helperText="Use your 89 number"
+            
           />
 
           <Button
