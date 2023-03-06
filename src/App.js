@@ -13,7 +13,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { ref } from "firebase/storage";
 import Home from "./Pages/Home";
 import Alumni from "./Pages/Alumni";
-import Scholorship from "./Pages/Scholorship";
+import Scholarship from "./Pages/Scholarship";
 import Photos from "./Pages/Photos";
 import Calander from "./Pages/Calander";
 import Members from "./Pages/Members";
@@ -118,7 +118,7 @@ function App() {
 
               <Route path="/alumni" element={<Alumni />} />
 
-              <Route path="/scholorship" element={<Scholorship />} />
+              <Route path="/Scholarship" element={<Scholarship />} />
 
               <Route path="/photos" element={<Photos />} />
 

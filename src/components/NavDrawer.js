@@ -61,10 +61,10 @@ function NavDrawer(props) {
               <Divider  orientation="vertical" flexItem sx={{ mr:2}} />
                 <ListItemText primary={'Alumni'} />
               </ListItemButton>
-              <ListItemButton onClick={() => navigate("/scholorship")}>
+              <ListItemButton onClick={() => navigate("/Scholarship")}>
               <MenuBookIcon color = 'darkGold' sx={{ml:1, mr:2}}/>
               <Divider  orientation="vertical" flexItem sx={{ mr:2}} />
-                <ListItemText primary={'Scholorship'} />
+                <ListItemText primary={'Scholarship'} />
               </ListItemButton>
               <ListItemButton onClick={() => navigate("/photos")}>
               <PhotoLibraryIcon color = 'darkGold' sx={{ml:1, mr:2}}/>

@@ -6,10 +6,21 @@
     justify-content: center;
     align-items: center;
 }
+@media (max-width: 600px) {
+    .slider{
+    position: relative;
+    max-height: 250px;
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+}
 .img{
     max-height: 455px;
     min-width: 70%;
-    min-height: 50%;
+    min-height: 70%;
     height: auto;
     width: auto;
     border-radius: 10px;
